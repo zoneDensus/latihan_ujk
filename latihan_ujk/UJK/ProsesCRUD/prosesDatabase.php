@@ -16,7 +16,7 @@ function semuaMahasiswa($query)
     return $dataMahasiswa; // untuk membuat function ini bernilai data 'dataMahasiswa'
 }
 
-
+// Proses input
 function inputMahasiswa($data)
 {
     
@@ -37,4 +37,19 @@ function inputMahasiswa($data)
     // Sekarang proses memasukan data ke table mahasiswa yang ada di database phpdasar
     $insertData = $conn->query($sql);
     return $insertData;
+}
+
+
+// Proses Delete Data
+function deleteMahasiswa($id_mahasiswa)
+{
+    // tidak usah pakai ['id'], karena ini merupakan method GET yang diberikan URL. jadi data bukan berupa array
+    $id = $id_mahasiswa;
+
+    global $conn;
+
+    $sql = "DELETE FROM mahasiswa WHERE id=$id"; // delete mahasiswa berdasarkan ID-nya mereka
+    $cekStatusDelete = $conn->query($sql);
+
+    return $cekStatusDelete;
 }

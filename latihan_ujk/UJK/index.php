@@ -28,6 +28,25 @@
         }
     }
 
+
+
+    // Cek GET yang ada di tag <a> pada bagian delete, apakah sudah di set atau belum
+    if (isset($_GET['delete'])) 
+    {
+        $id_mahasiswa = $_GET['delete']; //id mahasiswa yang tadi dimasukan ke variable untuk di input ke dalama function deleteMahasiswa
+
+        // memanggil function delete pada file prosesDatabase.php, lalu memprosesnya serta melakukan cekStatusnya
+        $cekStatusDelete = deleteMahasiswa($id_mahasiswa);
+
+        // Pengecekan status
+        if ($cekStatusDelete == true) {
+            $status = "Data Mahasiswa Tersebut berhasil dihapus";
+        }else{
+            $status = "Data Mahasiswa Tersebut Gagal di Hapus";
+        }
+        
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,6 +105,7 @@
                     <th scope="col-">nrp</th>
                     <th scope="col-">Email</th>
                     <th scope="col-">jurusan</th>
+                    <th scope="col-">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -103,6 +123,10 @@
                     <td><?= $data['nrp'] ?></td>
                     <td><?= $data['email'] ?></td>
                     <td><?= $data['jurusan'] ?></td>
+                    <td>
+                        <!-- artinya url get['delete'] dengan data id mahasiswa akan di proses diatas cek kode line 33 - 48-->
+                        <a href="?delete=<?= $data['id'] ?>" class="btn btn-danger">Delete</a>
+                    </td>
                 </tr>
                 <?php 
                     endforeach;
