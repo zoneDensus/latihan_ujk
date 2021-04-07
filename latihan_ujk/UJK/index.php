@@ -15,7 +15,17 @@
     // Jika tombol input mahasiswa di set. maka jalankan programnya. cek bagian button form input, terdapat attribute name="inputMahasiswa"
     if (isset($_POST['inputMahasiswa'])) 
     {
-        
+        // function inputMahasiswa ada di folder ProsesCRUD dengan nama file ProsesDatabase.php
+        // nanti data $_POST yang di inputkan pada form, akan di proses di function inputMahasiswa()
+        // variable $cekStatus untuk mengecek datanya true(masuk ke database) atau false (tidak masuk ke database)
+        $cekStatus = inputMahasiswa($_POST);
+
+        if ($cekStatus == true) 
+        {
+            $status = "Data Berhasil dimasukan ke Database dengan nama table mahasiswa";
+        }else{
+            $status = "Data Gagal di input cuk";
+        }
     }
 
 ?>
@@ -36,6 +46,16 @@
 
     <div class="container">
 
+        <!-- Cek Status/alert informasi data berhasil di input atau tidak -->
+        <!-- Jika variable status sudah diset, maka muncul alert, variable status ada di atas -->
+        <?php if(isset($status)) : ?>
+            <div class="alert alert-success">
+                <?= $status ?>
+            </div>
+        <?php endif ?>
+
+
+
         <!-- Form Input data -->
         <form action="" method="post">
 
@@ -49,8 +69,8 @@
             <label for="em">Email</label>
             <input type="text" name="email" class="form-control" id="em">
 
-            <label for="al">Alamat</label>
-            <input type="text" name="alamat" class="form-control" id="al">
+            <label for="al">Jurusan</label>
+            <input type="text" name="jurusan" class="form-control" id="al">
             <br>
 
             <!-- Jangan lupa type buttonnya untuk menjalankan aksi formnya bertipe = "submit" -->
